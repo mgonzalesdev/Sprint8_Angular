@@ -1,0 +1,7 @@
+    <div class="grid">
+      @for (item of products(); track item.id) {
+        <app-product-card [product]="item" />
+      } @empty {
+        <p>No hay regalos disponibles en este momento. 🎁</p>
+      }
+    </div>
