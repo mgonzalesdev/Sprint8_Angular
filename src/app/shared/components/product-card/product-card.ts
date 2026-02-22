@@ -1,10 +1,11 @@
 import { DatePipe } from '@angular/common';
 import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Product } from '@core/models/product.model';
 
 @Component({
   selector: 'app-product-card',
-  imports: [DatePipe],
+  imports: [DatePipe,RouterLink],
   templateUrl: './product-card.html',
   styleUrl: './product-card.scss',
 })

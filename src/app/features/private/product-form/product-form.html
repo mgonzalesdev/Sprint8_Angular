@@ -1,0 +1,28 @@
+<form [formGroup]="productForm" (ngSubmit)="save()">
+    <input formControlName="name" placeholder="Nombre del objeto">
+    <textarea formControlName="description" placeholder="Descripción"></textarea>
+    <label>Categoría:</label>
+    <select formControlName="categoryId">
+        <option [value]="null">Seleccione categoría</option>
+        @for (cat of categories(); track cat.id) {
+        <option [value]="cat.id">{{ cat.name }}</option>
+        }
+    </select>
+    <label>Estado:</label>
+    <select formControlName="statusId">
+        <option [value]="null">Seleccione estado</option>
+        @for (status of statuses(); track status.id) {
+        <option [value]="status.id">{{ status.name }}</option>
+        }
+    </select>
+    <label>Condición:</label>
+    <select formControlName="conditionId">
+        <option [value]="null">Seleccione condición del producto</option>
+        @for (condition of conditions(); track condition.id) {
+        <option [value]="condition.id">{{ condition.name }}</option>
+        }
+    </select>
+    <button type="submit" [disabled]="productForm.invalid">
+        {{ id() ? 'Actualizar' : 'Publicar' }}
+    </button>
+</form>
