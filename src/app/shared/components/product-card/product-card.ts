@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Product } from '@core/models/product.model';
+import { Product } from '@core/models/catalog.model';
 
 @Component({
   selector: 'app-product-card',

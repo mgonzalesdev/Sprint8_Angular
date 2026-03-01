@@ -22,6 +22,12 @@
         <option [value]="condition.id">{{ condition.name }}</option>
         }
     </select>
+    <div class="location-section">
+        <label>Ubicación de entrega (Mueve el marcador a una zona cercana)</label>
+        <app-map [lat]="coords().lat" [lng]="coords().lng" [isEditable]="true"
+            (locationChanged)="onMapChange($event)" />
+        <p class="help-text">Por tu seguridad, no marques el punto exacto de tu casa.</p>
+    </div>
     <button type="submit" [disabled]="productForm.invalid">
         {{ id() ? 'Actualizar' : 'Publicar' }}
     </button>

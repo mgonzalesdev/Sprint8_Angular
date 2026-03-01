@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, input, viewChild } from '@angular/core';
+import { Component, effect, ElementRef, input, output, viewChild } from '@angular/core';
 import * as L from 'leaflet';
 
 @Component({
@@ -8,11 +8,14 @@ import * as L from 'leaflet';
   styleUrl: './map.scss',
 })
 export class Map {
- lat = input.required<number>();
+  lat = input.required<number>();
   lng = input.required<number>();
-  
+  isEditable = input<boolean>(false);
+  locationChanged = output<{ lat: number, lng: number }>();
+
   mapContainer = viewChild.required<ElementRef>('mapContainer');
   private map!: L.Map;
+  private marker!: L.Marker;
 
   constructor() {
     // Reacciona automáticamente cuando cambian las coordenadas
@@ -30,8 +33,18 @@ export class Map {
       attribution: '© OpenStreetMap'
     }).addTo(this.map);
 
-    L.marker([lat, lng]).addTo(this.map)
-      .bindPopup('Punto de entrega 🎁')
-      .openPopup();
+    /* L.marker([lat, lng]).addTo(this.map)
+       .bindPopup('Punto de entrega 🎁')
+       .openPopup();*/
+    this.marker = L.marker([lat, lng], {
+      draggable: this.isEditable() // 👈 Habilitar arrastre si es editable
+    }).addTo(this.map);
+    
+    if (this.isEditable()) {
+      this.marker.on('dragend', () => {
+        const position = this.marker.getLatLng();
+        this.locationChanged.emit({ lat: position.lat, lng: position.lng });
+      });
+    }
   }
 }

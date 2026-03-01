@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
+import { Component, effect, inject, input } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ProductService } from '@core/services/product.service';
 import { Map } from '@shared/components/map/map';
@@ -23,6 +23,10 @@ export class ProductDetail {
     toObservable(this.id).pipe(
       // Convertimos el string a number aquí para que coincida con tu API
       switchMap(id => this.productService.getProductById(Number(id)))
-    )
+    )     
   );
+
+ private logDatos = effect(() => {
+    console.log('Datos recibidos del backend:', this.product());
+  });
 }

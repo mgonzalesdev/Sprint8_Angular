@@ -1,0 +1,50 @@
+<div class="admin-container">
+    <div class="header">
+        <h2>Gestión de mis Regalos 🎁</h2>
+        <button class="btn-new" routerLink="/manage/new">+ Nuevo Objeto</button>
+    </div>
+
+    @if (isLoading()) {
+    <p>Cargando productos...</p>
+    } @else {
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of products(); track item.id) {
+            <tr>
+                <td>
+                    <strong>{{ item.name }}</strong>
+                    <small>{{ item.category.name }}</small>
+                </td>
+                <td>
+                    <span class="badge" [class]="item.status.name.toLowerCase()">
+                        {{ item.status.name }}
+                    </span>
+                </td>
+                <td>{{ item.publicationDate | date:'shortDate' }}</td>
+                <td class="actions-cell">
+                    <!-- Botones alineados horizontalmente -->
+                    <button class="btn-icon edit" [routerLink]="['/manage/edit', item.id]" title="Editar">
+                        ✏️
+                    </button>
+                    <button class="btn-icon delete" (click)="deleteProduct(item.id)" title="Eliminar">
+                        🗑️
+                    </button>
+                </td>
+            </tr>
+            } @empty {
+            <tr>
+                <td colspan="4" class="empty-msg">Aún no has publicado nada.</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    }
+</div>
