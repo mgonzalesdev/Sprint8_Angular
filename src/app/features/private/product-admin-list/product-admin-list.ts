@@ -3,10 +3,11 @@ import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Product } from '@core/models/catalog.model';
 import { ProductService } from '@core/services/product.service';
+import { CustomCalendar } from '@shared/components/custom-calendar/custom-calendar';
 
 @Component({
   selector: 'app-product-admin-list',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink,CustomCalendar],
   templateUrl: './product-admin-list.html',
   styleUrl: './product-admin-list.scss',
 })
