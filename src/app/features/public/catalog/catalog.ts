@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ProductService } from '@core/services/product';
 import { ProductCard } from '@shared/components/product-card/product-card';
@@ -12,8 +12,12 @@ import { CatalogMap } from './components/catalog-map/catalog-map';
 })
 export class Catalog {
   private productService = inject(ProductService);
-  // Convertimos el observable a Signal directamente
 
-   viewMode = signal<'grid' | 'map'>('grid');
-  products = toSignal(this.productService.getProducts(), { initialValue: [] });
+  viewMode = signal<'grid' | 'map'>('grid');
+  allProducts = toSignal(this.productService.getProducts(), { initialValue: [] });
+
+  products = computed(() =>
+    this.allProducts().filter(p => p.status.name !== 'Entregado')
+  );
+
 }

@@ -28,7 +28,7 @@ export interface CategoryStat {
   value: string | number; 
 }
 
-// Estructura para el gráfico de Barras 
+// Estructura para el grafico de Barras 
 export interface TrendStat {
   month: string; // Formato 'YYYY-MM'
   total: string | number;

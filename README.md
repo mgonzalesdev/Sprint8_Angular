@@ -1,59 +1,101 @@
-# DonationsAngular
+# 🎁 RegalaApp - API de Intercambio Solidario
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.5.
+**RegalaApp** es una plataforma creada para conectar a personas que quieren dar una segunda vida a sus objetos con quienes los necesitan. El proyecto fomenta la economía circular y el impacto social positivo.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Tecnologías Utilizadas
 
+### **Backend (API)**
+*   **Framework:** [NestJS](https://nestjs.com) (Node.js)
+*   **Base de Datos:**  MySQL (vía **TypeORM**)
+*   **Arquitectura:** Modular con Controladores, Servicios y Entidades.
+
+### **Frontend (App)**
+*   **Framework:** [Angular 21](https://angular.dev) (Standalone Components)
+*   **Estado:** **Angular Signals** (Reactividad de última generación)
+*   **Estilos:** **Tailwind CSS** (Diseño responsivo y moderno)
+*   **Mapas:** Leaflet (Ubicación aproximada por seguridad)
+*   **Gráficos:** Chart.js / Ng2-charts (Dashboard de impacto social)
+*   **Calendario:** FullCalendar (Historial de actividad)
+
+---
+
+## 📦 Estructura del Proyecto
+
+### **Architecture**
+```text
+└───app
+    ├───core                # Services, Layout (Navbar), Interfaces
+    │   ├───auth
+    │   ├───components
+    │   │   └───navbar
+    │   ├───models
+    │   │       catalog.model.ts
+    │   └───services
+    │           catalog.ts
+    │           product.service.ts
+    │           stats.ts
+    ├───features            # Módulos de lógica de negocio
+    │   ├───auth
+    │   ├───private         # Dashboard, Gestión de Inventario (CRUD) y Formulario
+    │   │   ├───dashboard   
+    │   │   ├───product-admin-list
+    │   │   └───product-form
+    │   └───public         # Catalogo de objetos
+    │       ├───catalog
+    │       │   └───components
+    │       │       └───catalog-map
+    │       └───product-detail
+    └───shared              # Componentes reutilizables (Maps, ProductCards)
+        └───components
+            ├───chart
+            ├───custom-calendar
+            ├───map
+            └───product-card
+```  
+
+## 🛠️ Instalación y Configuración
+
+### 1. Clonar el repositorio
 ```bash
+git clone https://github.com/mgonzalesdev/Sprint8_Angular.git
+cd <directorio_app>  
+```
+ 
+### 2. Configurar el Backend (NestJS)
+Tener en cuenta que la app consume la api (Nestjs), para ello debe estar debidamente configurada.  
+
+### 3. Configurar el Frontend (Angular)
+```bash
+cd regala-app
+npm install
 ng serve
 ```
+La aplicación estará disponible en: [http://localhost:4200](http://localhost:4200)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## ✨ Características Principales
+*   **Catálogo:** Visualización en modo galería (cuadrícula) o mapa interactivo donde muestra los objetos disponibles a regalar.
+*   **Dashboard de Impacto:** Gráficos en tiempo real sobre productos salvados y tendencias.
+*   **Privacidad:** Geolocalización con redondeo de seguridad para proteger la ubicación exacta del donante.
+*   **Gestión Total (CRUD):** Panel administrativo para publicar, editar, reservar o dar de baja objetos.
+*   **Diseño:** Interfaz limpia construida con Tailwind CSS.
 
-## Code scaffolding
+## 🛡️ Seguridad y Privacidad
+El sistema implementa un **redondeo de coordenadas** en el frontend antes de enviar los datos al servidor, asegurando que la ubicación guardada tenga un margen de error de aproximadamente 100 metros, protegiendo así la dirección exacta del usuario.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-```bash
-ng generate component component-name
-```
+### 📸 Capturas de Pantalla
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-```bash
-ng generate --help
-```
+| ![Catalogo](/public/screenshots/catalog.png) | ![Catalogo Mapa](/public/screenshots/catalog-map.png) |
+| :---: | :---: |
+| *Vista del listado de objetos* | *Objetos localizados en el mapa* |
 
-## Building
+| ![Dashboard de Impacto](/public/screenshots/impacto.png) | ![Gestión de mis objetos](/public/screenshots/crud.png) |
+| :---: | :---: |
+| *Vista del panel de estadísticas* | *Gestión de objetos* |
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+| ![Registrar Artículo](/public/screenshots/form.png) | 
+| :---: | 
+| *Formulario de registro* | 
